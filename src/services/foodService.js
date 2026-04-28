@@ -1,14 +1,13 @@
 import axios from "axios";
-
-const API_URL = 'http://localhost:8080/api/foods';
+import { API_URL } from './axiosConfig';
 
 export const addFood = async (foodData, image) => {
-    const formData = new FormData();
+    const formData = new FormData();    
     formData.append('food', JSON.stringify(foodData));
     formData.append('file', image); 
 
     try {
-        await axios.post(API_URL, formData, {headers: { "Content-Type": "multipart/form-data"}});
+        await axios.post(API_URL, formData, {headers: { "Content-Type": "multipart/form-data", "Authorization": "Bearer " + localStorage.getItem('token')  }});
     } catch (error) {
         console.log('Error', error);
         throw error;
@@ -17,7 +16,7 @@ export const addFood = async (foodData, image) => {
 
 export const getFoodList = async () => {
     try {
-        const response = await axios.get(API_URL);
+        const response = await axios.get(API_URL, {headers: { "Authorization": "Bearer " + localStorage.getItem('token')  }});
         return response.data;
     } catch (error) {
         console.log('Error fetching food list', error);
@@ -27,7 +26,7 @@ export const getFoodList = async () => {
 
 export const deleteFood = async (foodId) => {
     try {
-        const response = await axios.delete(API_URL+"/"+foodId);
+        const response = await axios.delete(API_URL+"/"+foodId, {headers: { "Authorization": "Bearer " + localStorage.getItem('token')  }});
         return response.status === 204;
     } catch (error) {
         console.log('Error while deleting the food.', error);

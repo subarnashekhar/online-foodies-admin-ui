@@ -6,6 +6,7 @@ import { deleteFood, getFoodList } from "../../services/foodService";
 
 const ListFood = () => {
   const [list, setList] = useState([]);
+  
   const fetchList = async () => {
     try {
       const data = await getFoodList();
@@ -30,7 +31,11 @@ const ListFood = () => {
   };
 
   useEffect(() => {
-    fetchList();
+    // Only fetch if user is authenticated (has a token)
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetchList();
+    }
   }, []);
   return (
     <div className="py-5 row justify-content-center">
@@ -54,7 +59,7 @@ const ListFood = () => {
                   </td>
                   <td>{item.name}</td>
                   <td>{item.category}</td>
-                  <td>&#8377;{item.price}.00</td>
+                  <td>${item.price}.00</td>
                   <td className="text-danger">
                     <i
                       class="bi bi-trash-fill fs-4"

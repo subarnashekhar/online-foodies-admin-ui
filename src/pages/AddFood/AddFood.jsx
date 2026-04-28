@@ -28,7 +28,7 @@ const AddFood = () => {
         try {
             await addFood(data, image);
             toast.success('Food added successfully.');
-            setData({name: '', description: '', category: 'Biryani', price: ''});
+            setData({name: '', description: '', category: 'Burger', price: ''});
             setImage(null);
         } catch (error) {
             toast.error('Error adding food.');
@@ -49,7 +49,7 @@ const AddFood = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="name" className="form-label">Name</label>
-            <input type="text" placeholder='Chicken Biryani' className="form-control" id="name" required name='name' onChange={onChangeHandler} value={data.name}/>
+            <input type="text" placeholder='Burger' className="form-control" id="name" required name='name' onChange={onChangeHandler} value={data.name}/>
           </div>
           
           <div className="mb-3">
@@ -59,18 +59,18 @@ const AddFood = () => {
           <div className="mb-3">
             <label htmlFor="category" className="form-label">Category</label>
             <select name="category" id="category" className='form-control' onChange={onChangeHandler} value={data.category}>
-                <option value="Biryani">Biryani</option>
+                <option value="Burger">Burger</option>
                 <option value="Cake">Cake</option>
-                <option value="Burger">Buger</option>
                 <option value="Pizza">Pizza</option>
                 <option value="Rolls">Rolls</option>
+                <option value="Hot dog">Hot Dog</option>
                 <option value="Salad">Salad</option>
                 <option value="Ice cream">Ice cream</option>
             </select>
           </div>
           <div className="mb-3">
             <label htmlFor="price" className="form-label">Price</label>
-            <input type="number" name="price" id="price" placeholder='&#8377;200' className='form-control' onChange={onChangeHandler} value={data.price} />
+            <input type="number" name="price" id="price" placeholder='&#x24;10' className='form-control' onChange={onChangeHandler} value={data.price} />
           </div>
           <button type="submit" className="btn btn-primary">Save</button>
         </form>
